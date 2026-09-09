@@ -1,7 +1,4 @@
 pipeline {
-    environment {
-        PATH+DOCKER = "/Applications/Docker.app/Contents/Resources/bin"
-    }
     agent any
 
     stages {
@@ -38,6 +35,7 @@ pipeline {
         stage('Health Check') {
             steps {
                 sh '''
+export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
                     /Applications/Docker.app/Contents/Resources/bin/docker rm -f jenkins-health-check 2>/dev/null || true
                     /Applications/Docker.app/Contents/Resources/bin/docker run -d --name jenkins-health-check -p 5001:5000 system-health-dashboard:${BUILD_NUMBER}
                     sleep 5
