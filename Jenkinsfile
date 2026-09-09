@@ -1,4 +1,7 @@
 pipeline {
+    environment {
+        PATH+DOCKER = "/Applications/Docker.app/Contents/Resources/bin"
+    }
     agent any
 
     stages {
