@@ -29,6 +29,7 @@ pipeline {
             steps {
                 sh '''
                     export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
+                    export DOCKER_HOST="unix:///Users/anushkadave/.docker/run/docker.sock"
                     export DOCKER_CONFIG="$WORKSPACE/.docker-jenkins"
                     mkdir -p "$DOCKER_CONFIG"
                     printf '{"auths":{}}' > "$DOCKER_CONFIG/config.json"
@@ -44,6 +45,7 @@ pipeline {
             steps {
                 sh '''
                     export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
+                    export DOCKER_HOST="unix:///Users/anushkadave/.docker/run/docker.sock"
                     export DOCKER_CONFIG="$WORKSPACE/.docker-jenkins"
 
                     docker tag system-health-dashboard:${BUILD_NUMBER} \
@@ -56,6 +58,7 @@ pipeline {
             steps {
                 sh '''
                     export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
+                    export DOCKER_HOST="unix:///Users/anushkadave/.docker/run/docker.sock"
                     export DOCKER_CONFIG="$WORKSPACE/.docker-jenkins"
 
                     docker rm -f jenkins-health-check 2>/dev/null || true
@@ -82,6 +85,7 @@ pipeline {
         always {
             sh '''
                 export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
+                    export DOCKER_HOST="unix:///Users/anushkadave/.docker/run/docker.sock"
                 docker rm -f jenkins-health-check 2>/dev/null || true
             '''
         }
